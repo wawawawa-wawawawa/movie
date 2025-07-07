@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ジャンル別映画ライブラリ</title>
+  <style>
+    body {
+      font-family: "Hiragino Maru Gothic Pro", "Rounded Mplus 1c", sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);;/* グレー背景 */
+      color: #c85554; /* 文字色 */
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #bccddb;
+      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
+    .search-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      width: 60%;
+      max-width: 400px;
+      font-size: 1em;
+      color: #bccddb;
+      background: #f0f0f0;
+      border: 1px solid #bccddb;
+    }
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .filter-buttons button /*タグ色*/{
+      background: #d0d0d0;
+      color: #bccddb;
+      border: none;
+      padding: 8px 14px;
+      margin: 4px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-buttons button.active,
+    .filter-buttons button:hover {
+      background: #bccddb;
+      color: white;
+    }
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* ← ここで3列に指定！ */
+      gap: 20px;
+    }
+    .movie-card {
+      background: white;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 8px 15px rgba(4, 60, 120, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
+      color: #bccddb;
+    }
+    .movie-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px #bccddb(4, 60, 120, 0.5);
+    }
+    .movie-card iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .movie-card h2 {
+      font-size: 1.2em;
+      color: #bccddb;
+      margin: 10px 0 5px;
+    }
+    .movie-card p {
+      font-size: 0.9em;
+      margin: 5px 0 6px;
+    }
+    .movie-card a, .movie-card .site-link {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #bccddb;
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s ease;
+      margin: 4px 6px 0 6px;
+    }
+    .movie-card a:hover, .movie-card .site-link:hover {
+      background: #021e3d;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    /* タグの背景色は見やすいよう少し薄めに調整 */
+    .tag {
+      font-size: 0.75em;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+      color: white;
+    }
+    .tag.anime { background-color: #a84a71; }
+    .tag.romance { background-color: #99303f; }
+    .tag.fantasy { background-color: #5d54b0; }
+    .tag.adventure { background-color: #2c9d7f; }
+    .tag.ghibli { background-color: #d1c571; color: #333; }
+    .tag.drama { background-color: #2f8f99; }
+    .tag.comedy { background-color: #b97c70; }
+  </style>
+</head>
+<body>
+
+  <h1>映画ライブラリ</h1>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" oninput="searchMovies()" placeholder="キーワードで検索..." />
+  </div>
+
+  <div class="filter-buttons">
+    <button class="active" onclick="filterMovies('all')">すべて</button>
+    <button onclick="filterMovies('romance')">恋愛</button>
+    <button onclick="filterMovies('suspense')">サスペンス</button>
+    <button onclick="filterMovies('fantasy')">ファンタジー</button>
+    <button onclick="filterMovies('ghibli')">ジブリ</button>
+    <button onclick="filterMovies('drama')">ドラマ</button>
+    <button onclick="filterMovies('comedy')">コメディ</button>
+  </div>
+
+  <div class="movie-grid">
+
+
+    <!-- 架空OL日記 -->
+    <div class="movie-card" data-tags="drama comedy">
+      <iframe src="https://www.youtube.com/embed/gVhSxIuaaPA?si=Si2iSkWbzOBbX8eK"  allowfullscreen></iframe>
+      <h2>架空OL日記</h2>
+      <div class="tag-list">
+        <span class="tag drama">ドラマ</span>
+        <span class="tag comedy">コメディ</span>
+      </div>
+      <p>2017年・監督: バカリズム</p>
+      <a href="kaku_ol.html">詳しく見る</a>
+      <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+    </div>
+
+    <!-- 1st Kiss -->
+    <div class="movie-card" data-tags="romance drama">
+      <iframe src="https://www.youtube.com/embed/Ba7CxVOmjDI?si=nlKOUosbSzf-Mf_-" allowfullscreen></iframe>
+      <h2>1st Kiss</h2>
+      <div class="tag-list">
+        <span class="tag romance">恋愛</span>
+        <span class="tag drama">ドラマ</span>
+      </div>
+      <p>2007年・監督: 松たか子</p>
+      <a href="#">詳しく見る</a>
+      <a href="https://1stkiss-movie.toho.co.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+    </div>
+
+<!-- 正体 -->
+   <div class="movie-card" data-tags="drama comedy">
+    <iframe src="https://www.youtube.com/embed/WOTyCcO1MZU?si=AtLQLExYeOGgodcD" allowfullscreen></iframe>　
+    <h2>正体</h2>
+    <div class="tag-list">
+      <span class="tag drama">サスペンス</span>
+      <span class="tag comedy">コメディ</span>
+    </div>
+    <p>2017年・監督: バカリズム</p>
+    <a href="kaku_ol.html">詳しく見る</a>
+    <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+  </div>
+
+
+<!--生きてるだけで、愛 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/Rw_tut2tVcQ?si=YZqBLfZTgjhyOtcY"  allowfullscreen></iframe>
+  <h2>生きてるだけで、愛</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!--夜明けのすべて-->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/XpvWd2uSmyQ?si=VpyGw7dEoq_dUVTk"  allowfullscreen></iframe>
+  <h2>夜明けのすべて</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- ちょっと思い出しただけ -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/9cKGsnUMs8w?si=zUpMB06KfkVgkXRS"  allowfullscreen></iframe>
+  <h2>ちょっと思い出しただけ</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://choiomo.com" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 余命１０年-->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/ZKkhbfUCUPM?si=Yj68oImRRCpwzBwm"  allowfullscreen></iframe>
+  <h2>余命１０年</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 流浪の月-->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/uDOZfOlA4oY?si=oWOosH3FwwPeQ-75"  allowfullscreen></iframe>
+  <h2>流浪の月</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- missing -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/YSxzyey7GGg?si=zEwFb-VHtkZV9Bq-"  allowfullscreen></iframe>
+  <h2>missing</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 小さな恋のうた -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/NWMlFj0PPtQ?si=98mLY_w378pETZcu"  allowfullscreen></iframe>
+  <h2>小さな恋のうた</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- ひらいて -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/vsYItnKPt1o?si=y6kgbKQKcZ1k7UXg"  allowfullscreen></iframe>
+  <h2>ひらいて</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- ラストレター -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/EvkzNshmjCA?si=1uAkCHWk9plffXsE"  allowfullscreen></iframe>
+  <h2>ラストレター</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 花束みたいな恋をした -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>花束みたいな恋をした</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- ラストマイル -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/jCH7TOZIG4s?si=pyfY1slW83bTQ7qv"  allowfullscreen></iframe>
+  <h2>ラストマイル</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- 怪物 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/S3XB1sFhQiA?si=riAHlWAgNKtitj_r"  allowfullscreen></iframe>
+  <h2>怪物</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- 新幹線代爆破 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/fAr5tfKpE_I?si=KBVCzSCh4AnQeoAF"  allowfullscreen></iframe>
+  <h2>新幹線大爆破</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 朽ちないサクラ -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/0135ru2HfuU?si=YedqsVNPfpwyTh6K"  allowfullscreen></iframe>
+  <h2>朽ちないサクラ</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 本心 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/EpVuBvUWuac?si=-x3y1N0-6IT3CBF-"  allowfullscreen></iframe>
+  <h2>本心</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!--そして父になる -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/sRGhEzALb4w?si=hGEKntCE-HaM3_y7"  allowfullscreen></iframe>
+  <h2>そして父になる</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!--うみべの女の子 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/46oXLX_CSCs?si=wH4y-F-9bbDpOxeF"  allowfullscreen></iframe>
+  <h2>うみべの女の子</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 怒り -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/aIFCb9JKdZw?si=36YXbFZ3zJJ6vOIO"  allowfullscreen></iframe>
+  <h2>怒り</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 正欲 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/qEPtPDCFcJs?si=TBKlaQzeHcaDSUIS"  allowfullscreen></iframe>
+  <h2>正欲</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 告白 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>告白</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 三度目の殺人 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>三度目の殺人</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 本心 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>本心</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 本心 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>本心</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 本心 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>本心</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 本心 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>本心</h2>
+  <div class="tag-list">
+    <span class="tag drama">恋愛</span>
+    <span class="tag comedy">コメディ</span>
+  </div>
+  <p>2017年・監督: バカリズム</p>
+  <a href="kaku_ol.html">詳しく見る</a>
+  <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+  <script>
+    function filterMovies(tag) {
+      document.querySelectorAll('.filter-buttons button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.movie-card');
+      cards.forEach(card => {
+        const tags = card.getAttribute('data-tags').split(' ');
+        card.style.display = (tag === 'all' || tags.includes(tag)) ? 'block' : 'none';
+      });
+    }
+
+    function searchMovies() {
+      const keyword = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.movie-card');
+      cards.forEach(card => {
+        const title = card.querySelector('h2').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+        card.style.display = (title.includes(keyword) || desc.includes(keyword)) ? 'block' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
