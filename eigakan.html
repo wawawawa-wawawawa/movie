@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>映画館を楽しむ方法</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -14,12 +14,13 @@
     }
 
     .container {
-      max-width: 900px;
-      margin: 0 auto;
+      max-width: 1000px;
+      margin: auto;
       background: #ffffff;
       border-radius: 18px;
       padding: 50px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
     h1 {
@@ -27,8 +28,7 @@
       text-align: center;
       margin-bottom: 30px;
       color: #858585;
-      position: relative;
-      animation: popIn 1.6s ease-in-out;
+      animation: fadeInDown 1.2s ease-in-out;
     }
 
     h1::after {
@@ -41,46 +41,154 @@
       border-radius: 2px;
     }
 
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.85) translateY(-20px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      margin-top: 60px;
+      padding: 20px;
+      border-radius: 16px;
+      background-color: rgba(255, 255, 255, 0.85);
+      background-blend-mode: lighten;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease-out;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
     }
 
     h2 {
       font-size: 1.8em;
-      margin-top: 40px;
-      border-left: 5px solid #bccbdb;
+      margin-bottom: 20px;
       padding-left: 12px;
+      border-left: 5px solid #bccbdb;
+      color: #858585;
+      animation: floatUp 1s ease-out;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    h2::before {
+      content: '🎬';
+      margin-right: 8px;
+      font-size: 1.1em;
+      display: inline-block;
+      animation: sparkle 1.2s ease-in-out;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.5) rotate(-20deg); }
+      60% { opacity: 1; transform: scale(1.2) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    h3 {
+      font-size: 1.4em;
+      margin-top: 30px;
+      color: #858585;
+    }
+
+    p, ul, table {
+      font-size: 1.1em;
+      color: #858585;
+    }
+
+    .section[data-bg="aeon"] {
+      background-image: url('images/aeon.jpeg');
+    }
+    .section[data-bg="joy"] {
+      background-image: url('images/joy.jpeg');
+    }
+    .section[data-bg="united"] {
+      background-image: url('images/united.jpeg');
+    }
+    .section[data-bg="toho"] {
+      background-image: url('images/toho.jpeg');
     }
 
 
 
-    p {
-      font-size: 1.1em;
+    .theater-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .theater-card {
+      border: 1px solid #cde6f5;
+      border-radius: 12px;
+      padding: 20px;
+      background-color: #f7fbfd;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .theater-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .theater-card h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      color: #858585;
+    }
+
+    .theater-card p {
+      font-size: 0.95em;
+      margin: 6px 0;
+    }
+
+    .theater-card ul {
+      text-align: left;
+      padding-left: 20px;
       margin-top: 10px;
     }
 
-    .image-section {
+    .theater-card a {
+      display: inline-block;
+      margin-top: 12px;
+      background-color: #9ed9e6;
+      color: #858585;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .theater-card a:hover {
+      background-color: #bccbdb;
+    }
+
+
+    .footer {
       text-align: center;
-      margin: 30px 0;
+      margin-top: 60px;
+      font-size: 0.95em;
+      color: #777;
     }
 
-    .image-section img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    .tip-box {
-      background: #f0f8fb;
-      border-left: 6px solid #bccbdb;
-      padding: 15px 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      font-size: 1em;
-    }
-
-    .back-link {
+    a.back-link {
       display: block;
       text-align: center;
       margin-top: 50px;
@@ -94,123 +202,125 @@
       transition: background-color 0.3s;
     }
 
-    .back-link:hover {
-      background-color: #bccbdb;
+    a.back-link:hover {
+      background-color: #a4becf;
     }
+
+
+
+    
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('h2').forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.3}s`;
+      });
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
 </head>
 <body>
   <div class="container">
     <h1>映画館を楽しむ方法</h1>
-    <p style="text-align: center; font-size: 1.2em;">映画館を最高に楽しむ方法を紹介します。</p>
+ <p style="text-align: center; font-size: 1.2em;">映画館を最高に楽しむ方法を紹介します。</p>
+   <div class="section" data-bg="aeon">
+      <h2>劇場ごとの施設・アクセス比較</h2>
 
-    <h2>映画館の選び方</h2>
-    <p>・Tジョイ博多</p>
-    <p></p>
-    <p>・Tジョイ博多</p>
-    <p>・Tジョイ博多</p>
-    <p>・Tジョイ博多</p>
-    
+       
+      
+      
+      <div class="theater-section">
+      <div class="theater-card">
+        <img src="images/aeon.jpeg" alt="イオンシネマ福岡">
+        <h3>イオンシネマ福岡</h3>
+        <p>ショッピングモール併設で便利</p>
+        <ul>
+          <li>スクリーン数：9</li>
+          <li>座席数：約1,200</li>
+          <li>駐車場：あり（無料）</li>
+          <li>アクセス：JR笹原駅 徒歩約10分</li>
+        </ul>
+      </div>
 
-    <h2>座る場所</h2>
-    <p>みんなどこに座っているのか気になったので、アンケートを取ってみました。</p>
-    
+      <div class="theater-card">
+        <img src="images/joy.jpeg" alt="Tジョイ博多">
+        <h3>T・ジョイ博多</h3>
+        <p>博多駅直結・買い物も便利</p>
+        <ul>
+          <li>スクリーン数：11</li>
+          <li>座席数：約2,000</li>
+          <li>駐車場：提携あり（有料）</li>
+          <li>アクセス：JR博多駅直結（JR博多シティ9F）</li>
+        </ul>
+      </div>
 
-    <div class="image-section">
-      <img src="images/seat1.png">
+      <div class="theater-card">
+        <img src="images/united.jpeg" alt="ユナイテッド・シネマキャナルシティ">
+        <h3>ユナイテッド・シネマ キャナルシティ博多</h3>
+        <p>ショッピング＆観光スポット内</p>
+        <ul>
+          <li>スクリーン数：13</li>
+          <li>座席数：約2,300</li>
+          <li>駐車場：キャナル提携（有料）</li>
+          <li>アクセス：中洲川端駅 徒歩10分</li>
+        </ul>
+      </div>
+
+      <div class="theater-card">
+        <img src="images/toho.jpeg" alt="TOHOシネマズ天神・ソラリア館">
+        <h3>TOHOシネマズ 天神・ソラリア館</h3>
+        <p>天神中心部でアクセス抜群</p>
+        <ul>
+          <li>スクリーン数：8</li>
+          <li>座席数：約1,000</li>
+          <li>駐車場：ソラリア提携（有料）</li>
+          <li>アクセス：西鉄福岡（天神）駅 直結</li>
+        </ul>
+      </div>
     </div>
-    <p>アンケート結果</p>
-    <div class="image-section">
-    <img src="images/seat.png">
-  </div>
-  <p>ちなみに私はいちばん後ろの端の席が好きです。（蹴られないで済むから、、）</p>
+
+    <div class="footer">
+    </div>
+
+
+
+
+
+
+    
+    </div>
+
+    <div class="section" data-bg="joy">
+      <h2>座る場所</h2>
+      <p>みんなどこに座っているのか気になったので、アンケートを取ってみました。</p>
+      <img src="images/seat1.png" style="max-width: 40%; border-radius: 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);">
+      <img src="images/seat.png" style="max-width: 50%; border-radius: 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); margin-left: 20px;">
+      <p>ちなみに私はいちばん後ろの端の席が好きです。（蹴られないで済むから、、）</p>
+    </div>
+
+    <div class="section" data-bg="united">
+      <h2>フード</h2>
+      <h3>イオンシネマ、Tジョイ、ユナイテッド・シネマ、TOHOシネマの四つの劇場のフードを比較しました。</h3>
+      
+      
+      
+      
+      
+      <style>
    
-    <h2>フード</h2>
-    <h3>イオンシネマ、Tジョイ、ユナイテッド・シネマ、TOHOシネマの四つの劇場のフードを比較しました。</h3>
-
-
-    <h3>・ポップコーン</h3>
-    <p>王道。</p>
-    <p>最安→（Sサイズ、ユナイテッド・シネマ、Tジョイ、３２０円）</p>
-    <p>定番→塩、キャラメル</p>
-    <p>珍メニュー（期間限定有）→レモンレアチーズケーキ（イオンシネマ）、ストロングチョコレート・キャラメルチェダー・贅沢抹茶とホワイトチョコ・香るベーコン&チーズ・ご褒美チーズケーキ（Tジョイ）、トリュフソルト＆バター味・ブラックペッパー味・塩キャラメル味・いちごみるく味・サッポロポテトバーベQあじ（TOHOシネマ）</p>
-    <p>((バター多めって言ったらかけてくれるらしい、、？))</p>
-
-    <p>・ポテト</p>
-    <p>最安→（ユナイテッド・シネマ、400円）</p>
-    <p>珍メニュー（期間限定有）→シチリアハーブソルト味、トリュフソルトバター味（TOHOシネマ）</p>
-
-    <p>・ホットドッグ</p>
-    <p>最安→（ユナイテッド・シネマ、400円）</p>
-    <p>珍メニュー（期間限定有）→スパイシーハラペーニョ,ちょい辛サルサ＆アボカド,ガリポテ、ビーフシチュー＆チーズ、ケチャップ＆マスタード、4種のチーズ（TOHOシネマ）</p>
-
-
-    <p>・チュリトス</p>
-    <p>最安→（ユナイテッド・シネマ、TOHOシネマ、400円）</p>
-　　 <p>レインボーチュリトス（TOHOシネマズ）</p>
-
-    <p>・ドリンク</p>
-    <p>最安→イオンシネマ（Sサイズ、３２０円）</p>
-    <p>珍メニュー（期間限定有）→超パッション＆マンゴー・超ストロベリー、台湾レモネード、とろけるマスカット、黒糖ブラックタピオカミルクティー、ICEE（アイシー）（TOHOシネマ）</p>
-
-
-    <p>・その他</p>
-    <p>イオンシネマ→ナチョス（サルサ・チーズ）</p>
-    <p>Tジョイ→フライドチキン、クラフトビール、アイスクレープ、梅昆布茶</p>
-    <p>ユナイテッド・シネマ→ワッフル</p>
-    <p>TOHOシネマ→スパイシーポップチキン</p>
-    <p>ホットドッグ</p>
-
-
-
-
-
-
-
-    <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>映画館フードパンフレット</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 40px 20px;
-      font-family: 'Noto Serif JP', serif;
-      background: linear-gradient(to right, #f0f8ff, #e6f1f7);
-      color: #2c3e50;
-    }
-
-    .pamphlet {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
-      padding: 50px;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2.6em;
-      margin-bottom: 20px;
-      color: #1a3e58;
-    }
-
-    h2 {
-      margin-top: 40px;
-      font-size: 1.6em;
-      border-left: 5px solid #7cbcd6;
-      padding-left: 10px;
-      color: #1f4f66;
-    }
-
-    h3 {
-      margin-top: 20px;
-      font-size: 1.3em;
-      color: #2c3e50;
-    }
 
     p {
       font-size: 1.1em;
@@ -231,7 +341,7 @@
     }
 
     table, th, td {
-      border: 1px solid #aacbdc;
+      border: 1px solid #bccbdb;
     }
 
     th, td {
@@ -241,7 +351,7 @@
     }
 
     th {
-      background-color: #d9ecf3;
+      background-color: #bdd3db;
     }
 
     .footer {
@@ -253,18 +363,18 @@
   </style>
 </head>
 <body>
-  <div class="pamphlet">
-    <h1>🍿 映画館フードガイド</h1>
-    <p style="text-align: center; font-size: 1.2em;">映画と一緒に楽しみたい、おすすめのフードをご紹介します。</p>
-
-    <h2>🎬 フード</h2>
-
-    <h3>🎥 イオンシネマ・Tジョイ・ユナイテッド・シネマ・TOHOシネマのフード比較</h3>
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <h3>🍿 ポップコーン</h3>
-    <p><strong>王道。</strong></p>
     <p><strong>最安：</strong>Sサイズ 320円（ユナイテッド・シネマ、Tジョイ）</p>
-    <p><strong>定番：</strong>塩味、キャラメル味</p>
 
     <p><strong>珍しい・期間限定メニュー：</strong></p>
     <table>
@@ -299,13 +409,12 @@
       <li>TOHOシネマ：スパイシーポップチキン</li>
     </ul>
 
-    <div class="footer">
-      ※価格やメニューは劇場・時期によって異なります。最新情報は各劇場の公式サイトをご確認ください。
-    </div>
-
-
    
-    <a href="index.html" class="back-link">トップページに戻る</a>
+   
+
+    <div class="footer">
+      <a href="index.html" class="back-link">トップページに戻る</a>
+    </div>
   </div>
 </body>
 </html>
