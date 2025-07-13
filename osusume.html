@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>映画ライブラリ</title>
+     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+ 
+  <style>
+
+
+
+
+ h1 {
+      font-size: 2.8em;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #858585;
+      animation: fadeInDown 1.2s ease-in-out;
+    }
+
+    h1::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #bccbdb;
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+     body {
+        margin: 0;
+        font-family: 'Noto Serif JP', serif;
+        background: url("images/back.jpg") no-repeat center center / cover;
+        color: #858585;
+        padding: 40px 40px;
+      }
+    h1 {
+      text-align: center;
+      color: #bccddb;
+      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
+    
+   
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+; /* ← ここで3列に指定！ */
+      gap: 20px;
+    }
+    .movie-card {
+      background: white;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 8px 15px rgba(4, 60, 120, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
+      color: #bccddb;
+    }
+    .movie-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px #bccddb(4, 60, 120, 0.5);
+    }
+    .movie-card iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .movie-card h2 {
+      font-size: 1.2em;
+      color: #bccddb;
+      margin: 10px 0 5px;
+    }
+    .movie-card p {
+      font-size: 0.9em;
+      margin: 5px 0 6px;
+    }
+    .movie-card a, .movie-card .site-link {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #bccddb;
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s ease;
+      margin: 4px 6px 0 6px;
+    }
+    .movie-card a:hover, .movie-card .site-link:hover {
+      background: #021e3d;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 50px;
+      text-decoration: none;
+      background-color: #bccbdb;
+      padding: 14px 28px;
+      color: #858585;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: background-color 0.3s;
+    }
+
+    .back-link:hover {
+      background-color: #bccbdb;
+    }
+
+
+
+    
+    /* タグの背景色は見やすいよう少し薄めに調整 */
+    .tag {
+      font-size: 0.75em;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+      color: white;
+    }
+    .tag.suspense/*サスペンス*/{ background-color: #a84a71; }
+    .tag.romance/*恋愛*/ { background-color: #99303f; }
+    .tag.music/*音楽*/ { background-color: #5d54b0; }
+    .tag.seisyun/*青春*/ { background-color: #2c9d7f; }
+    .tag.pannic /*パニック*/{ background-color: #d1c571; }
+    .tag.drama /*ドラマ*/{ background-color: #2f8f99; }
+    .tag.mistery /*ミステリー*/{ background-color: #b97c70; }
+  </style>
+</head>
+
+
+
+
+
+<body>
+
+  <h1>映画ライブラリ</h1>
+
+  
+
+  <div class="movie-grid">
+
+
+    <!-- 架空OL日記 -->
+    <div class="movie-card" data-tags="drama comedy">
+      <iframe src="https://www.youtube.com/embed/gVhSxIuaaPA?si=Si2iSkWbzOBbX8eK"  allowfullscreen></iframe>
+      <h2>架空OL日記</h2>
+      <div class="tag-list">
+        <span class="tag drama">ドラマ</span>
+      </div>
+      <a href="https://www.kaku-ol.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+    </div>
+
+    <!-- 1st Kiss -->
+    <div class="movie-card" data-tags="romance drama">
+      <iframe src="https://www.youtube.com/embed/Ba7CxVOmjDI?si=nlKOUosbSzf-Mf_-" allowfullscreen></iframe>
+      <h2>1st Kiss</h2>
+      <div class="tag-list">
+        <span class="tag romance">恋愛</span>
+      </div>
+      <a href="https://1stkiss-movie.toho.co.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+    </div>
+
+<!-- 正体 -->
+   <div class="movie-card" data-tags="drama comedy">
+    <iframe src="https://www.youtube.com/embed/WOTyCcO1MZU?si=AtLQLExYeOGgodcD" allowfullscreen></iframe>
+    <h2>正体</h2>
+    <div class="tag-list">
+      <span class="tag suspense">サスペンス</span>
+    </div>
+   
+    <a href="https://movies.shochiku.co.jp/shotai-movie/" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+  </div>
+
+
+<!--生きてるだけで、愛 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/Rw_tut2tVcQ?si=YZqBLfZTgjhyOtcY"  allowfullscreen></iframe>
+  <h2>生きてるだけで、愛</h2>
+    <span class="tag romance">恋愛</span>
+  <div class="tag-list">
+    
+  </div>
+  
+</div>
+
+
+<!--夜明けのすべて-->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/XpvWd2uSmyQ?si=VpyGw7dEoq_dUVTk"  allowfullscreen></iframe>
+  <h2>夜明けのすべて</h2>
+  <div class="tag-list">
+            <span class="tag drama">ドラマ</span>
+
+  </div>
+ 
+ 
+  <a href="https://yoakenosubete-movie.asmik-ace.co.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- ちょっと思い出しただけ -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/9cKGsnUMs8w?si=zUpMB06KfkVgkXRS"  allowfullscreen></iframe>
+  <h2>ちょっと思い出しただけ</h2>
+  <div class="tag-list">
+    <span class="tag romance">恋愛</span>
+  </div>
+ 
+  <a href="https://choiomo.com" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 余命１０年-->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/ZKkhbfUCUPM?si=Yj68oImRRCpwzBwm"  allowfullscreen></iframe>
+  <h2>余命１０年</h2>
+  <div class="tag-list">
+    <span class="tag romance">恋愛</span>
+    <span class="tag drama">ドラマ</span>
+  </div>
+ 
+  <a href="https://wwws.warnerbros.co.jp/yomei10-movie/index.html" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 流浪の月-->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/uDOZfOlA4oY?si=oWOosH3FwwPeQ-75"  allowfullscreen></iframe>
+  <h2>流浪の月</h2>
+  <div class="tag-list">
+    <span class="tag suspense">サスペンス</span>
+  </div>
+  
+  <a href="https://gaga.ne.jp/rurounotsuki/" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- missing -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/YSxzyey7GGg?si=zEwFb-VHtkZV9Bq-"  allowfullscreen></iframe>
+  <h2>missing</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+  </div>
+ 
+  <a href="https://wwws.warnerbros.co.jp/missing/" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- 国宝 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/DAiq_4YWXow?si=vv0n9PFueQwb1qLl"  allowfullscreen></iframe>
+  <h2>国宝</h2>
+  <div class="tag-list">
+  <span class="tag drama">ドラマ</span>
+  </div>
+ 
+  <a href="https://kokuhou-movie.com" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- 小さな恋のうた -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/NWMlFj0PPtQ?si=98mLY_w378pETZcu"  allowfullscreen></iframe>
+  <h2>小さな恋のうた</h2>
+  <div class="tag-list">
+    <span class="tag music">音楽</span>
+    <span class="tag seisyun">青春</span>
+
+  </div>
+ 
+</div>
+
+<!-- ひらいて -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/vsYItnKPt1o?si=y6kgbKQKcZ1k7UXg"  allowfullscreen></iframe>
+  <h2>ひらいて</h2>
+  <div class="tag-list">
+    <span class="tag romance">恋愛</span>
+    <span class="tag seisyun">青春</span>
+  </div>
+
+  <a href="https://hiraite-movie.com" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- ラストレター -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/EvkzNshmjCA?si=1uAkCHWk9plffXsE"  allowfullscreen></iframe>
+  <h2>ラストレター</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+  </div>
+  
+</div>
+
+<!-- 花束みたいな恋をした -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/I7BIENRbF2g?si=_6z0iY2EXxq9-HN_"  allowfullscreen></iframe>
+  <h2>花束みたいな恋をした</h2>
+  <div class="tag-list">
+    <span class="tag romance">恋愛</span>
+  </div>
+ 
+  <a href="https://hana-koi.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- ラストマイル -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/jCH7TOZIG4s?si=pyfY1slW83bTQ7qv"  allowfullscreen></iframe>
+  <h2>ラストマイル</h2>
+  <div class="tag-list">
+    <span class="tag suspense">サスペンス</span>
+  </div>
+  
+  <a href="https://last-mile-movie.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- 怪物 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/S3XB1sFhQiA?si=riAHlWAgNKtitj_r"  allowfullscreen></iframe>
+  <h2>怪物</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+  </div>
+ 
+  <a href="https://gaga.ne.jp/kaibutsu-movie/" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+<!-- 新幹線代爆破 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/fAr5tfKpE_I?si=KBVCzSCh4AnQeoAF"  allowfullscreen></iframe>
+  <h2>新幹線大爆破</h2>
+  <div class="tag-list">
+    <span class="tag pannic">パニック</span>
+    </div>
+  
+</div>
+
+<!-- 朽ちないサクラ -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/0135ru2HfuU?si=YedqsVNPfpwyTh6K"  allowfullscreen></iframe>
+  <h2>朽ちないサクラ</h2>
+  <div class="tag-list">
+    <span class="tag mistery">ミステリー</span>
+  </div>
+  <a href="https://culture-pub.jp/kuchinaisakura_movie/" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 本心 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/EpVuBvUWuac?si=-x3y1N0-6IT3CBF-"  allowfullscreen></iframe>
+  <h2>本心</h2>
+  <div class="tag-list">
+    <span class="tag mistery">ミステリー</span>
+  </div>
+  <a href="https://happinet-phantom.com/honshin/" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!--そして父になる -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/sRGhEzALb4w?si=hGEKntCE-HaM3_y7"  allowfullscreen></iframe>
+  <h2>そして父になる</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+  </div>
+</div>
+
+<!--うみべの女の子 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/46oXLX_CSCs?si=wH4y-F-9bbDpOxeF"  allowfullscreen></iframe>
+  <h2>うみべの女の子</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+    <span class="tag seisyun">青春</span>
+  </div>
+  <a href="https://umibe-girl.jp" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 怒り -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/aIFCb9JKdZw?si=36YXbFZ3zJJ6vOIO"  allowfullscreen></iframe>
+  <h2>怒り</h2>
+  <div class="tag-list">
+    <span class="tag mistery">ミステリー</span>
+  </div>
+</div>
+
+<!-- 正欲 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/qEPtPDCFcJs?si=TBKlaQzeHcaDSUIS"  allowfullscreen></iframe>
+  <h2>正欲</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+  </div>
+  <a href="https://www.bitters.co.jp/seiyoku/#modal" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+<!-- 告白 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/ZsOmp4-f2Tc?si=1Dee__zcuyGn6t7f"  allowfullscreen></iframe>
+  <h2>告白</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+    <span class="tag suspense">サスペンス</span>
+  </div>
+</div>
+
+<!-- 三度目の殺人 -->
+<div class="movie-card" data-tags="drama comedy">
+  <iframe src="https://www.youtube.com/embed/znX_FGhGBBo?si=ZYkigazzO_DInYTz"  allowfullscreen></iframe>
+  <h2>三度目の殺人</h2>
+  <div class="tag-list">
+    <span class="tag drama">ドラマ</span>
+    <span class="tag suspense">サスペンス</span>
+  </div>
+  <a href="https://gaga.ne.jp/sandome/" target="_blank" rel="noopener" class="site-link">公式サイト</a>
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+  
+
+
+ <a href="index.html" class="back-link">トップページに戻る</a>
+  </div>
+
+
+</body>
+</html>
